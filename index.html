@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Recipe Finder</title>
     <style>
-        /* Basic styling for your educational UI */
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
         .search-section { text-align: center; margin-bottom: 40px; }
         input { padding: 12px; width: 60%; border: 1px solid #ccc; border-radius: 25px; outline: none; }
@@ -21,7 +20,7 @@
 <body>
 
     <div class="search-section">
-        <h1>🌍 Global Recipe Finder</h1>
+        <h1>🌍  Recipe Finder</h1>
         <p>Explore cultures through simple and delicious meals.</p>
         <input type="text" id="mealSearch" placeholder="Type a food (e.g., pizza, curry, tacos)...">
         <button onclick="findRecipes()">Search</button>
@@ -59,7 +58,7 @@
                     resultsContainer.innerHTML = '<p>No meals found. Try searching for "Beef", "Chicken", or "Pasta".</p>';
                 }
             } catch (error) {
-                resultsContainer.innerHTML = '<p>here was an error connecting to the API.</p>';
+                resultsContainer.innerHTML = '<p>There was an error connecting to the API.</p>';
             }
         }
     </script>
