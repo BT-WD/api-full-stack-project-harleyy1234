@@ -1,11 +1,69 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>API Full Stack Project</title>
-  </head>
-  <body>
-    <!-- You code goes here-->
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Recipe Finder</title>
+    <style>
+        /* Basic styling for your educational UI */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+        .search-section { text-align: center; margin-bottom: 40px; }
+        input { padding: 12px; width: 60%; border: 1px solid #ccc; border-radius: 25px; outline: none; }
+        button { padding: 12px 25px; border-radius: 25px; border: none; background: #ff6347; color: white; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #e5533d; }
+        
+        #results { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .recipe-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; padding-bottom: 15px; }
+        .recipe-card img { width: 100%; height: 200px; object-fit: cover; }
+        .category-tag { background: #eee; font-size: 0.8rem; padding: 4px 10px; border-radius: 10px; color: #666; }
+    </style>
+</head>
+<body>
+
+    <div class="search-section">
+        <h1>🌍 Global Recipe Finder</h1>
+        <p>Explore cultures through simple, delicious meals.</p>
+        <input type="text" id="mealSearch" placeholder="Type a food (e.g., Pizza, Curry, Tacos)...">
+        <button onclick="findRecipes()">Search</button>
+    </div>
+
+    <div id="results">
+
+    </div>
+
+    <script>
+        async function findRecipes() {
+            const query = document.getElementById('mealSearch').value;
+            const resultsContainer = document.getElementById('results');
+            
+            // Show loading state
+            resultsContainer.innerHTML = '<p>Exploring the kitchen...</p>';
+
+            try {
+                const response = await fetch(`https://themealdb.com{query}`);
+                const data = await response.json();
+
+                resultsContainer.innerHTML = ''; 
+
+                if (data.meals) {
+                    data.meals.forEach(meal => {
+                        // Creating the card structure
+                        resultsContainer.innerHTML += `
+                            <div class="recipe-card">
+                                <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+                                <h3>${meal.strMeal}</h3>
+                                <span class="category-tag">${meal.strArea} | ${meal.strCategory}</span>
+                                <p><a href="${meal.strYoutube}" target="_blank" style="color: #ff6347;">Watch Video</a></p>
+                            </div>
+                        `;
+                    });
+                } else {
+                    resultsContainer.innerHTML = '<p>No meals found. Try searching for "Beef", "Chicken", or "Pasta".</p>';
+                }
+            } catch (error) {
+                resultsContainer.innerHTML = '<p>Sorry, there was an error connecting to the API.</p>';
+            }
+        }
+    </script>
+</body>
 </html>
