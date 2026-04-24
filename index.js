@@ -72,3 +72,50 @@ displayMeal(meal.idMeal);
 
 }
 
+async function displayMeal(id){
+
+const response =
+await fetch(
+"https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id
+);
+
+const data =
+await response.json();
+
+const meal =
+data.meals[0];
+
+
+let ingredients = "";
+
+for(let i=1;i<=8;i++){
+
+if(meal["strIngredient"+i]){
+
+ingredients +=
+"<li>" +
+meal["strIngredient"+i] +
+"</li>";
+
+}
+
+}
+
+results.innerHTML +=
+`
+<div class="card">
+
+<img src="${meal.strMealThumb}">
+
+<div class="card-content">
+
+<h3>${meal.strMeal}</h3>
+
+<p>
+
+
+
+}
+loadCountries();
+
+
