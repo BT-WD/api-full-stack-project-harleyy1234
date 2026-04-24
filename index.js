@@ -113,7 +113,28 @@ results.innerHTML +=
 
 <p>
 
+${meal.strArea}
+|
+${meal.strCategory}
 
+</p>
+
+<ul class="ingredients">
+
+${ingredients}
+
+</ul>
+
+<a href="${meal.strYoutube}" target="_blank">
+
+Watch Video
+</a>
+
+</div>
+
+</div>
+
+`;
 
 }
 loadCountries();
